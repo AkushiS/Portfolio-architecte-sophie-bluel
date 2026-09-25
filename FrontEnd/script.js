@@ -3,66 +3,74 @@ const filters = document.querySelector(".filters");
 let works = [];
 
 function setActiveButton(button) {
+  //bouton qui sera actif
   filters.querySelectorAll("button").forEach((button) => {
-    button.classList.remove("active");
+    // selectionnes les boutons dans filters, fait une action pour chacun d'eux
+    button.classList.remove("active"); // supprime la class "active" de tous les boutons
   });
 
-  button.classList.add("active");
+  button.classList.add("active"); // ajoute la class "active" au bouton actuel
 }
 
-const allButton = document.createElement("button");
-allButton.textContent = "Tous";
-allButton.classList.add("active");
-filters.appendChild(allButton);
+const allButton = document.createElement("button"); // Crée variable allbuton contenant l'élément "button"
+allButton.textContent = "Tous"; // ajout texte "Tous" dans ce button
+allButton.classList.add("active"); // ajout class "active" dans ce button
+filters.appendChild(allButton); // allButton enfant de filters
 
 allButton.addEventListener("click", () => {
-  displayWorks(works);
-  setActiveButton(allButton);
+  // ajout event click à allButton
+  displayWorks(works); // éxecute la fonction displayWorks en donnant "works" ce qui affiche les travaux
+  setActiveButton(allButton); // éxecute la fonction setActiveButton en donnant "allButton" ce qui retire la class "active" à nos button et l'ajoute à allButton
 });
 
 function displayWorks(worksToDisplay) {
-  gallery.innerHTML = "";
+  // fonction displayWorks avec worksToDisplay en parametre
+  gallery.innerHTML = ""; // vide le contenue gallery
 
   worksToDisplay.forEach((work) => {
-    const figure = document.createElement("figure");
-    const img = document.createElement("img");
+    // pour chaque work dans worksToDisplay
+    const figure = document.createElement("figure"); //créer élément "figure"
+    const img = document.createElement("img"); //créer élément "img"
 
-    img.src = work.imageUrl;
-    img.alt = work.title;
+    img.src = work.imageUrl; // ajout à src l'URL qui ce trouve dans imageUrl
+    img.alt = work.title; // ajout à alt le texte qui ce trouve dans title
 
-    const figcaption = document.createElement("figcaption");
-    figcaption.textContent = work.title;
+    const figcaption = document.createElement("figcaption"); // créer l'élement figcaption
+    figcaption.textContent = work.title; // ajout texte dans figcaption qui est le titre du work
 
-    figure.appendChild(img);
-    figure.appendChild(figcaption);
+    figure.appendChild(img); // img deviens enfant de figure
+    figure.appendChild(figcaption); // figcaption deviens enfant de figure
 
-    gallery.appendChild(figure);
+    gallery.appendChild(figure); // figure deviens enfant de gallery
   });
 }
 
-fetch("http://localhost:5678/api/works")
-  .then((response) => response.json())
+fetch("http://localhost:5678/api/works") // requête vers l'URL
+  .then((response) => response.json()) // convertie la réponse en JS
   .then((data) => {
-    works = data;
-    console.log(works);
-    displayWorks(works);
+    // la réponse en JS
+    works = data; // works récupére la réponse JS
+    console.log(works); // affiche works dans la consol
+    displayWorks(works); // éxecute la fonction displayWorks en lui donnant works, affiche dans la gallery
   });
 
 fetch("http://localhost:5678/api/categories")
   .then((response) => response.json())
   .then((categories) => {
     categories.forEach((category) => {
-      const button = document.createElement("button");
-      button.textContent = category.name;
+      // pour chaque category dans categories
+      const button = document.createElement("button"); // créer bouton
+      button.textContent = category.name; // on donne comme texte le nom de la catégorie
 
       button.addEventListener("click", () => {
         const filteredWorks = works.filter(
-          (work) => work.categoryId === category.id,
+          // créer variable qui contient le résultat du filtrage
+          (work) => work.categoryId === category.id, //condition: id de la catégori dans work = à l'id de la catégorie actuel
         );
-        displayWorks(filteredWorks);
-        setActiveButton(button);
+        displayWorks(filteredWorks); // éxecute la fonction displayWorks avec filteredWorks
+        setActiveButton(button); // éxecute la fonction setActiveButton avec button
       });
 
-      filters.appendChild(button);
+      filters.appendChild(button); // button deviens enfant de filters
     });
   });
