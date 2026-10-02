@@ -378,3 +378,40 @@ nav a {
 #login-error {
   color: red;
 }
+
+.edition-mode {
+  display: none;
+}
+
+#modify-button {
+  display: none;
+  border: none;
+  background: none;
+  font-family: "Work Sans";
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.portfolio-title {
+  display: flex;
+  align-items: baseline;
+  gap: 30px;
+  justify-content: center;
+  margin-top: 130px;
+  margin-bottom: 60px;
+}
+
+.fa-edit {
+  padding-right: 10px;
+}
+
+.edition-mode {
+  display: none;
+  background-color: black;
+  color: white;
+  height: 59px;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}

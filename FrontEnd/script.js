@@ -1,5 +1,24 @@
+const token = localStorage.getItem("token");
+const editionMode = document.querySelector(".edition-mode");
+const loginLink = document.querySelector("#login-link");
 const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".filters");
+const modifyButton = document.querySelector("#modify-button");
+
+if (token) {
+  console.log("utilisateur connecté");
+  editionMode.style.display = "flex"; // affiche le mode edition
+  loginLink.textContent = "logout"; // modifie le text " login " par " logout "
+  filters.style.display = "none"; // cache .filters
+  modifyButton.style.display = "block"; // affiche modifyButton
+
+  loginLink.addEventListener("click", function (event) {
+    event.preventDefault(); // empêche la navigation vers login.html
+    localStorage.removeItem("token"); // supprime le token
+    window.location.href = "./index.html"; // Recharge la page
+  });
+}
+
 let works = [];
 
 function setActiveButton(button) {
