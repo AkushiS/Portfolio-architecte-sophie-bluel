@@ -64,6 +64,28 @@ function displayWorks(worksToDisplay) {
   });
 }
 
+function displayModalWorks() {
+  const modalGalleryContainer = document.querySelector(
+    ".modal-gallery-container",
+  );
+
+  works.forEach((work) => {
+    const figure = document.createElement("figure");
+    const img = document.createElement("img");
+    const deleteButton = document.createElement("button");
+
+    img.src = work.imageUrl;
+    img.alt = work.title;
+
+    deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+
+    figure.appendChild(img);
+    figure.appendChild(deleteButton);
+
+    modalGalleryContainer.appendChild(figure);
+  });
+}
+
 fetch("http://localhost:5678/api/works") // requête vers l'URL
   .then((response) => response.json()) // convertie la réponse en JS
   .then((data) => {

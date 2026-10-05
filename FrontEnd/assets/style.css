@@ -161,7 +161,7 @@ h1 > span {
 h2 {
   font-family: "Syne";
   font-weight: 700;
-  font-size: 30px;
+  font-size: 26px;
   color: #1d6154;
 }
 nav ul {
@@ -414,4 +414,88 @@ nav a {
   justify-content: center;
   width: 100vw;
   margin-left: calc(50% - 50vw);
+}
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  position: relative;
+  background-color: white;
+  width: 630px;
+  height: 688px;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.modal-close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  border: none;
+  background: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-content h2 {
+  font-family: "Work Sans";
+  color: black;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 60px;
+}
+
+.modal-gallery-container {
+  display: grid;
+  grid-template-columns: repeat(5, 76px);
+  column-gap: 9px;
+  row-gap: 28px;
+  width: 412px;
+  margin: 50px auto 0;
+}
+
+.modal-gallery-container img {
+  width: 76px;
+  height: 102px;
+  object-fit: cover;
+}
+
+.add-photo {
+  display: block;
+  font-family: "Syne";
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  background-color: #1d6154;
+  margin: 2.5em auto;
+  width: 237px;
+  text-align: center;
+  border-radius: 60px;
+  padding: 8px 0;
+}
+
+.add-photo-container {
+  border-top: 1px solid #b3b3b3;
+  width: 412px;
+  margin: 5em auto;
+}
+
+.modal-gallery-container figure {
+  position: relative;
+}
+
+.modal-gallery-container figure button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  padding: 3px 4px;
+  font-size: 10px;
 }
