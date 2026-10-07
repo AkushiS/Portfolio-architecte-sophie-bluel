@@ -69,10 +69,31 @@ function displayModalWorks() {
     ".modal-gallery-container",
   );
 
+  modalGalleryContainer.innerHTML = "";
+
   works.forEach((work) => {
     const figure = document.createElement("figure");
     const img = document.createElement("img");
     const deleteButton = document.createElement("button");
+
+    deleteButton.addEventListener("click", async function () {
+      const response = await fetch(
+        // Requête API
+        `http://localhost:5678/api/works/${work.id}`, // Cible le work cliqué
+        {
+          method: "DELETE", // Suppression ce work
+          headers: {
+            Authorization: `Bearer ${token}`, // envoi token : preuve connecté
+          },
+        },
+      );
+
+      if (response.ok) {
+        console.log("work supprimé");
+        works = works.filter((item) => item.id !== work.id);
+        figure.remove();
+      }
+    });
 
     img.src = work.imageUrl;
     img.alt = work.title;
@@ -102,6 +123,12 @@ fetch("http://localhost:5678/api/categories")
       // pour chaque category dans categories
       const button = document.createElement("button"); // créer bouton
       button.textContent = category.name; // on donne comme texte le nom de la catégorie
+
+      const option = document.createElement("option");
+      option.value = category.id;
+      option.textContent = category.name;
+
+      document.querySelector("#category").appendChild(option);
 
       button.addEventListener("click", () => {
         const filteredWorks = works.filter(

@@ -90,12 +90,38 @@
         </div>
 
         <div class="modal-form">
-            <button class="modal-back" aria-label="Retour">←</button>
+            <button class="modal-back" aria-label="Retour">
+				<i class="fas fa-arrow-left"></i>
+			</button>
 
             <h2>Ajout photo</h2>
 
             <form>
-                <!-- formulaire à construire ensuite -->
+                <div class="photo-upload">
+					<input type="file" id="photo" name="image" accept="image/*" required>
+					<img class="photo-preview" src="" alt="">
+					<i class="fas fa-image"></i>
+					<label for="photo">+ Ajouter photo</label>
+				</div>
+
+				<label for="title">Titre</label>
+				<input type="text" id="title" name="title" required>
+
+				<label for="category">Catégorie</label>
+
+				<div class="select-container">
+					<select id="category" name="category" required>
+						<option value="" selected disabled>&nbsp;</option>
+					</select>
+
+					<i class="fas fa-chevron-down"></i>
+				</div>
+
+				<div class="form-separator"></div>
+
+				<p class="form-error"></p>
+				
+				<button type="submit" disabled>Valider</button>
             </form>
         </div>
     </div>
