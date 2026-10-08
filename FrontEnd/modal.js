@@ -62,7 +62,7 @@ form.addEventListener("submit", async function (event) {
     works.push(newWork); // Ajout work dans works
 
     displayModalWorks(); // actualise la galerie du modale
-    displayWorks(works); // actualise la galerie principale
+    displayWorks(); // actualise la galerie principale
 
     modalBack.click(); // retour page précédente
   }

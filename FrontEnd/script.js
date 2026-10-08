@@ -38,16 +38,16 @@ filters.appendChild(allButton); // allButton enfant de filters
 
 allButton.addEventListener("click", () => {
   // ajout event click à allButton
-  displayWorks(works); // éxecute la fonction displayWorks en donnant "works" ce qui affiche les travaux
+  displayWorks(); // éxecute la fonction displayWorks en donnant "works" ce qui affiche les travaux
   setActiveButton(allButton); // éxecute la fonction setActiveButton en donnant "allButton" ce qui retire la class "active" à nos button et l'ajoute à allButton
 });
 
-function displayWorks(worksToDisplay) {
+function displayWorks() {
   // fonction displayWorks avec worksToDisplay en parametre
   gallery.innerHTML = ""; // vide le contenue gallery
 
-  worksToDisplay.forEach((work) => {
-    // pour chaque work dans worksToDisplay
+  works.forEach((work) => {
+    // pour chaque work dans works
     const figure = document.createElement("figure"); //créer élément "figure"
     const img = document.createElement("img"); //créer élément "img"
 
@@ -112,7 +112,7 @@ fetch("http://localhost:5678/api/works") // requête vers l'URL
     // la réponse en JS
     works = data; // works récupére la réponse JS
     console.log(works); // affiche works dans la consol
-    displayWorks(works); // éxecute la fonction displayWorks en lui donnant works, affiche dans la gallery
+    displayWorks(); // éxecute la fonction displayWorks en lui donnant works, affiche dans la gallery
   });
 
 fetch("http://localhost:5678/api/categories")

@@ -30,7 +30,7 @@ loginForm.addEventListener("submit", async function (event) {
     window.location.href = "./index.html"; // va sur la page index.html
   } else {
     // si connexion échouer
-    loginError.textContent = "E-mail ou mot de passe incorrect."; // modifie le test de loginError
+    loginError.textContent = "E-mail ou mot de passe incorrect."; // modifie le text de loginError
   }
 
   console.log(data);
