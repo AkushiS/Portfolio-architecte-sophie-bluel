@@ -69,7 +69,7 @@ function displayModalWorks() {
     ".modal-gallery-container",
   );
 
-  modalGalleryContainer.innerHTML = "";
+  modalGalleryContainer.innerHTML = ""; // vide le contenue
 
   works.forEach((work) => {
     const figure = document.createElement("figure");
@@ -81,7 +81,7 @@ function displayModalWorks() {
         // Requête API
         `http://localhost:5678/api/works/${work.id}`, // Cible le work cliqué
         {
-          method: "DELETE", // Suppression ce work
+          method: "DELETE", // Suppression de ce work
           headers: {
             Authorization: `Bearer ${token}`, // envoi token : preuve connecté
           },
@@ -89,16 +89,15 @@ function displayModalWorks() {
       );
 
       if (response.ok) {
-        console.log("work supprimé");
-        works = works.filter((item) => item.id !== work.id);
-        figure.remove();
+        works = works.filter((item) => item.id !== work.id); // retire le work supprimé de works
+        figure.remove(); // supprime l'élément figure
       }
     });
 
     img.src = work.imageUrl;
     img.alt = work.title;
 
-    deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>';
+    deleteButton.innerHTML = '<i class="fas fa-trash-alt"></i>'; // ajout icone corbeille
 
     figure.appendChild(img);
     figure.appendChild(deleteButton);
@@ -125,10 +124,10 @@ fetch("http://localhost:5678/api/categories")
       button.textContent = category.name; // on donne comme texte le nom de la catégorie
 
       const option = document.createElement("option");
-      option.value = category.id;
-      option.textContent = category.name;
+      option.value = category.id; // donne l'ID de la catégorie
+      option.textContent = category.name; // affiche le nom de la catégorie
 
-      document.querySelector("#category").appendChild(option);
+      document.querySelector("#category").appendChild(option); // ajoute option comme enfant de #category
 
       button.addEventListener("click", () => {
         const filteredWorks = works.filter(
