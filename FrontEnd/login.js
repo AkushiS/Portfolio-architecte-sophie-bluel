@@ -1,5 +1,9 @@
+// LES VARIABLES
+
 const loginForm = document.querySelector("#login-form"); // récupère ID du formulaire
 const loginError = document.querySelector("#login-error"); // récupère ID login-error
+
+// EVENEMENT DU FORMULAIRE DE CONNEXION
 
 loginForm.addEventListener("submit", async function (event) {
   // quand formulaire est Submit, execute cette fonction

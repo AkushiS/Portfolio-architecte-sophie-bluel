@@ -1,9 +1,15 @@
+// LES VARIABLES
+
 const token = localStorage.getItem("token");
 const editionMode = document.querySelector(".edition-mode");
 const loginLink = document.querySelector("#login-link");
 const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".filters");
 const modifyButton = document.querySelector("#modify-button");
+
+let works = [];
+
+// GESTION DE CONNEXION
 
 if (token) {
   console.log("utilisateur connecté");
@@ -19,7 +25,9 @@ if (token) {
   });
 }
 
-let works = [];
+// DECLARATION DES FONCTIONS :
+
+// 1-Gére le bouton de filtre
 
 function setActiveButton(button) {
   //bouton qui sera actif
@@ -31,23 +39,14 @@ function setActiveButton(button) {
   button.classList.add("active"); // ajoute la class "active" au bouton actuel
 }
 
-const allButton = document.createElement("button"); // Crée variable allbuton contenant l'élément "button"
-allButton.textContent = "Tous"; // ajout texte "Tous" dans ce button
-allButton.classList.add("active"); // ajout class "active" dans ce button
-filters.appendChild(allButton); // allButton enfant de filters
+// 2-Affiche les travaux dans la galerie principale
 
-allButton.addEventListener("click", () => {
-  // ajout event click à allButton
-  displayWorks(); // éxecute la fonction displayWorks en donnant "works" ce qui affiche les travaux
-  setActiveButton(allButton); // éxecute la fonction setActiveButton en donnant "allButton" ce qui retire la class "active" à nos button et l'ajoute à allButton
-});
-
-function displayWorks() {
+function displayWorks(worksToDisplay = works) {
   // fonction displayWorks avec worksToDisplay en parametre
   gallery.innerHTML = ""; // vide le contenue gallery
 
-  works.forEach((work) => {
-    // pour chaque work dans works
+  worksToDisplay.forEach((work) => {
+    // pour chaque work dans worksToDisplay
     const figure = document.createElement("figure"); //créer élément "figure"
     const img = document.createElement("img"); //créer élément "img"
 
@@ -63,6 +62,8 @@ function displayWorks() {
     gallery.appendChild(figure); // figure deviens enfant de gallery
   });
 }
+
+// 3-Affiche les travaux dans la galerie de la modale, avec un bouton pour supprimé
 
 function displayModalWorks() {
   const modalGalleryContainer = document.querySelector(
@@ -105,6 +106,21 @@ function displayModalWorks() {
     modalGalleryContainer.appendChild(figure);
   });
 }
+
+// CREATION DES FILTRES
+
+const allButton = document.createElement("button"); // Crée variable allbuton contenant l'élément "button"
+allButton.textContent = "Tous"; // ajout texte "Tous" dans ce button
+allButton.classList.add("active"); // ajout class "active" dans ce button
+filters.appendChild(allButton); // allButton enfant de filters
+
+allButton.addEventListener("click", () => {
+  // ajout event click à allButton
+  displayWorks(); // éxecute la fonction displayWorks en donnant "works" ce qui affiche les travaux
+  setActiveButton(allButton); // éxecute la fonction setActiveButton en donnant "allButton" ce qui retire la class "active" à nos button et l'ajoute à allButton
+});
+
+// RECUPERATION DES DONNEES DE L'API
 
 fetch("http://localhost:5678/api/works") // requête vers l'URL
   .then((response) => response.json()) // convertie la réponse en JS

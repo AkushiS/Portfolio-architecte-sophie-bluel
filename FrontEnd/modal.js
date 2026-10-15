@@ -1,3 +1,5 @@
+// LES VARIABLES
+
 const modal = document.querySelector(".modal");
 const closeButton = document.querySelector(".modal-close");
 const modalGallery = document.querySelector(".modal-gallery");
@@ -11,6 +13,10 @@ const categoryInput = document.querySelector("#category");
 const submitButton = document.querySelector('button[type="submit"]');
 const photoPreview = document.querySelector(".photo-preview");
 const formError = document.querySelector(".form-error");
+
+// DECLARATION DES FONCTIONS :
+
+// 1-Vérifie si tous les champs obligatoires sont remplis
 
 function checkForm() {
   if (
@@ -26,6 +32,25 @@ function checkForm() {
   }
 }
 
+// 2-Réinitialise le formulaire et réaffiche la galerie de la modale
+
+function resetForm() {
+  form.reset();
+
+  modalForm.style.display = "none"; // cache formulaire d'ajout photo
+  modalGallery.style.display = "block"; // affiche la galerie de la modale
+
+  photoPreview.src = ""; // retire l'image de l'aperçu
+  photoPreview.style.display = "none"; // cache l'aperçu
+
+  document.querySelector(".photo-upload .fa-image").style.display = "block"; // réaffiche l'icone image
+  document.querySelector(".photo-upload label").style.display = "flex"; // réaffiche "+ Ajouter photo"
+
+  submitButton.disabled = true; // désactive le bouton valider
+}
+
+// EVENEMENTS DU FORMULAIRE
+
 photoInput.addEventListener("change", function () {
   const file = photoInput.files[0]; // Récupère l'image dans la variable file
 
@@ -39,6 +64,7 @@ photoInput.addEventListener("change", function () {
 
   checkForm(); // execute la fonction checkForm
 });
+
 titleInput.addEventListener("input", checkForm); // execute checkForm quand le contenue de Titre change
 categoryInput.addEventListener("change", checkForm); // execute checkForm quand le contenue de Catégories change
 
@@ -68,6 +94,8 @@ form.addEventListener("submit", async function (event) {
   }
 });
 
+// EVENEMENTS DE LA MODALE
+
 modifyButton.addEventListener("click", function () {
   modal.style.display = "flex"; // rend modale visible
   displayModalWorks(); // affiche les works dans galerie modale
@@ -94,18 +122,3 @@ addPhotoButton.addEventListener("click", function () {
 modalBack.addEventListener("click", function () {
   resetForm();
 });
-
-function resetForm() {
-  form.reset();
-
-  modalForm.style.display = "none"; // cache formulaire d'ajout photo
-  modalGallery.style.display = "block"; // affiche la galerie de la modale
-
-  photoPreview.src = ""; // retire l'image de l'aperçu
-  photoPreview.style.display = "none"; // cache l'aperçu
-
-  document.querySelector(".photo-upload .fa-image").style.display = "block"; // réaffiche l'icone image
-  document.querySelector(".photo-upload label").style.display = "flex"; // réaffiche "+ Ajouter photo"
-
-  submitButton.disabled = true; // désactive le bouton valider
-}
