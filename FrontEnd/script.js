@@ -107,7 +107,7 @@ function displayModalWorks() {
   });
 }
 
-// CREATION DES FILTRES
+// CREATION DU FILTRE "TOUS"
 
 const allButton = document.createElement("button"); // Crée variable allbuton contenant l'élément "button"
 allButton.textContent = "Tous"; // ajout texte "Tous" dans ce button
