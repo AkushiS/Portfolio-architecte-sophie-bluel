@@ -92,6 +92,7 @@ function displayModalWorks() {
       if (response.ok) {
         works = works.filter((item) => item.id !== work.id); // retire le work supprimé de works
         figure.remove(); // supprime l'élément figure
+        displayWorks();
       }
     });
 
